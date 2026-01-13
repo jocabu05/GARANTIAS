@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.garantias.controller.DashboardContentController"
+      spacing="25" styleClass="dashboard-content">
+    
+    <!-- Stats Cards -->
+    <HBox spacing="20">
+        <!-- Garantías Activas -->
+        <VBox styleClass="stat-card stat-primary" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+            <Label text="Garantías Activas" styleClass="stat-label"/>
+            <Label fx:id="statGarantiasActivas" text="0" styleClass="stat-value"/>
+            <Label text="Total en sistema" styleClass="stat-sublabel"/>
+        </VBox>
+        
+        <!-- Próximas a Vencer -->
+        <VBox styleClass="stat-card stat-warning" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+            <Label text="Próximas a Vencer" styleClass="stat-label"/>
+            <Label fx:id="statGarantiasVencer" text="0" styleClass="stat-value"/>
+            <Label text="En los próximos 30 días" styleClass="stat-sublabel"/>
+        </VBox>
+        
+        <!-- Total Facturas -->
+        <VBox styleClass="stat-card stat-success" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+            <Label text="Facturas Emitidas" styleClass="stat-label"/>
+            <Label fx:id="statFacturasTotal" text="0" styleClass="stat-value"/>
+            <Label text="Total registradas" styleClass="stat-sublabel"/>
+        </VBox>
+        
+        <!-- Ingresos -->
+        <VBox styleClass="stat-card stat-info" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+            <Label text="Total Facturado" styleClass="stat-label"/>
+            <Label fx:id="statIngresosMes" text="€0" styleClass="stat-value"/>
+            <Label text="Ingresos totales" styleClass="stat-sublabel"/>
+        </VBox>
+    </HBox>
+    
+    <!-- Gráficas y Alertas -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        
+        <!-- Gráficas -->
+        <VBox spacing="20" HBox.hgrow="ALWAYS">
+            <!-- Gráfica de estados -->
+            <VBox styleClass="chart-card" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="Distribución de Garantías" styleClass="card-title"/>
+                <PieChart fx:id="estadoChart" VBox.vgrow="ALWAYS" legendSide="BOTTOM"/>
+            </VBox>
+        </VBox>
+        
+        <!-- Panel lateral -->
+        <VBox spacing="20" prefWidth="350">
+            
+            <!-- Alertas -->
+            <VBox styleClass="alerts-card" prefHeight="200">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="⚠️ Alertas de Vencimiento" styleClass="card-title"/>
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="alerts-scroll">
+                    <VBox fx:id="alertsContainer" spacing="8"/>
+                </ScrollPane>
+            </VBox>
+            
+            <!-- Acciones rápidas -->
+            <VBox styleClass="quick-actions-card">
+                <padding>
+                    <Insets top="15" right="20" bottom="15" left="20"/>
+                </padding>
+                <Label text="🚀 Acciones Rápidas" styleClass="card-title"/>
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10"/>
+                    </padding>
+                    <Button fx:id="btnNuevaGarantia" text="+ Nueva Garantía" styleClass="quick-action-btn primary" prefWidth="300" onAction="#onNuevaGarantia"/>
+                    <Button fx:id="btnNuevaFactura" text="+ Nueva Factura" styleClass="quick-action-btn success" prefWidth="300" onAction="#onNuevaFactura"/>
+                    <Button fx:id="btnVerReportes" text="📊 Ver Estadísticas" styleClass="quick-action-btn info" prefWidth="300" onAction="#onVerReportes"/>
+                </VBox>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>
+

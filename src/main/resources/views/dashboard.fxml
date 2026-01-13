@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.garantias.controller.DashboardController"
+            styleClass="dashboard-root">
+    
+    <!-- Sidebar -->
+    <left>
+        <VBox fx:id="sidebar" styleClass="sidebar" prefWidth="280" spacing="0">
+            
+            <!-- Header con usuario -->
+            <VBox styleClass="sidebar-header" alignment="CENTER" spacing="10">
+                <padding>
+                    <Insets top="30" right="20" bottom="30" left="20"/>
+                </padding>
+                
+                <StackPane>
+                    <Circle fx:id="userAvatar" radius="35" styleClass="user-avatar"/>
+                    <Label text="AD" styleClass="avatar-text"/>
+                </StackPane>
+                <Label fx:id="userNameLabel" text="Administrador" styleClass="user-name"/>
+                <Label fx:id="userRoleLabel" text="Admin" styleClass="user-role"/>
+            </VBox>
+            
+            <Separator/>
+            
+            <!-- Menú de navegación -->
+            <VBox styleClass="nav-menu" spacing="5">
+                <padding>
+                    <Insets top="20" right="15" bottom="20" left="15"/>
+                </padding>
+                
+                <Label text="MENÚ PRINCIPAL" styleClass="nav-section-title"/>
+                
+                <Button fx:id="btnDashboard" styleClass="nav-button" prefWidth="250" alignment="CENTER_LEFT">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-tachometer-alt" iconSize="18"/>
+                    </graphic>
+                    <text>Dashboard</text>
+                </Button>
+                
+                <Button fx:id="btnGarantias" styleClass="nav-button" prefWidth="250" alignment="CENTER_LEFT">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-shield-alt" iconSize="18"/>
+                    </graphic>
+                    <text>Garantías</text>
+                </Button>
+                
+                <Button fx:id="btnFacturas" styleClass="nav-button" prefWidth="250" alignment="CENTER_LEFT">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-file-invoice-dollar" iconSize="18"/>
+                    </graphic>
+                    <text>Facturas</text>
+                </Button>
+                
+                <Button fx:id="btnGraficas" styleClass="nav-button" prefWidth="250" alignment="CENTER_LEFT">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-chart-bar" iconSize="18"/>
+                    </graphic>
+                    <text>Estadísticas</text>
+                </Button>
+            </VBox>
+            
+            <!-- Espaciador -->
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Logout -->
+            <VBox styleClass="sidebar-footer">
+                <padding>
+                    <Insets top="15" right="15" bottom="25" left="15"/>
+                </padding>
+                <Separator/>
+                <Button fx:id="btnLogout" styleClass="nav-button logout-button" prefWidth="250" alignment="CENTER_LEFT">
+                    <VBox.margin>
+                        <Insets top="15"/>
+                    </VBox.margin>
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sign-out-alt" iconSize="18"/>
+                    </graphic>
+                    <text>Cerrar Sesión</text>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+    
+    <!-- Contenido principal -->
+    <center>
+        <VBox styleClass="main-content">
+            
+            <!-- Header -->
+            <HBox styleClass="content-header" alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="20" right="30" bottom="20" left="30"/>
+                </padding>
+                
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label fx:id="pageTitle" text="Dashboard" styleClass="page-title"/>
+                    <Label fx:id="dateLabel" text="Lunes, 30 de Diciembre 2024" styleClass="page-date"/>
+                </VBox>
+                
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button styleClass="header-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-bell" iconSize="16"/>
+                        </graphic>
+                    </Button>
+                    <Button styleClass="header-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-cog" iconSize="16"/>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </HBox>
+            
+            <!-- Área de contenido dinámico -->
+            <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS" styleClass="content-area">
+                <padding>
+                    <Insets top="20" right="30" bottom="30" left="30"/>
+                </padding>
+            </StackPane>
+        </VBox>
+    </center>
+</BorderPane>

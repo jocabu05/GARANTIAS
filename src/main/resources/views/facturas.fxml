@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.garantias.controller.FacturasController"
+      spacing="20" styleClass="page-content">
+    
+    <!-- Toolbar -->
+    <HBox styleClass="toolbar" spacing="15" alignment="CENTER_LEFT">
+        <padding>
+            <Insets top="15" right="20" bottom="15" left="20"/>
+        </padding>
+        
+        <!-- Búsqueda -->
+        <HBox styleClass="search-box" spacing="10" alignment="CENTER_LEFT">
+            <FontIcon iconLiteral="fas-search" iconSize="14" styleClass="search-icon"/>
+            <TextField fx:id="searchField" promptText="Buscar por número, cliente..." 
+                       prefWidth="250" styleClass="search-field"/>
+        </HBox>
+        
+        <!-- Filtros -->
+        <ComboBox fx:id="filterEstado" promptText="Estado" prefWidth="140"/>
+        <DatePicker fx:id="dateFrom" promptText="Desde" prefWidth="130"/>
+        <DatePicker fx:id="dateTo" promptText="Hasta" prefWidth="130"/>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <!-- Acciones -->
+        <Button fx:id="btnRefresh" styleClass="toolbar-button" onAction="#refreshData">
+            <graphic>
+                <FontIcon iconLiteral="fas-sync-alt" iconSize="14"/>
+            </graphic>
+        </Button>
+        
+        <Button fx:id="btnNueva" styleClass="toolbar-button success" onAction="#showNewFacturaDialog">
+            <graphic>
+                <FontIcon iconLiteral="fas-plus" iconSize="14"/>
+            </graphic>
+            <text>Nueva Factura</text>
+        </Button>
+    </HBox>
+    
+    <!-- Tabla -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container">
+        <padding>
+            <Insets top="0" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <TableView fx:id="facturasTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="colNumero" text="Nº Factura" prefWidth="130"/>
+                <TableColumn fx:id="colCliente" text="Cliente" prefWidth="220"/>
+                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="110"/>
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="120"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="130"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay facturas registradas" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+    
+    <!-- Footer -->
+    <HBox styleClass="table-footer" alignment="CENTER_LEFT" spacing="30">
+        <padding>
+            <Insets top="10" right="20" bottom="15" left="20"/>
+        </padding>
+        <Label fx:id="totalLabel" text="Mostrando 0 factura(s)" styleClass="footer-label"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="sumLabel" text="Total: €0.00" styleClass="footer-total"/>
+    </HBox>
+</VBox>

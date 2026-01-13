@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.garantias.controller.LoginController"
+           styleClass="login-root"
+           prefWidth="1280" prefHeight="720" minWidth="800" minHeight="600">
+    
+    <!-- Fondo con gradiente -->
+    <VBox fx:id="particlesContainer" styleClass="login-background" alignment="CENTER"
+          VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+    
+    <!-- Card de Login -->
+    <VBox fx:id="loginCard" styleClass="login-card" alignment="CENTER" spacing="25" 
+          maxWidth="420" maxHeight="520">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        
+        <!-- Logo / Icono -->
+        <VBox alignment="CENTER" spacing="10">
+            <StackPane styleClass="logo-container">
+                <Circle radius="40" styleClass="logo-circle"/>
+                <Label text="❄️" style="-fx-font-size: 36px;"/>
+            </StackPane>
+            <Label text="Sistema de Garantías" styleClass="login-title"/>
+            <Label text="Aires Acondicionados" styleClass="login-subtitle"/>
+        </VBox>
+        
+        <!-- Separador -->
+        <Separator maxWidth="100"/>
+        
+        <!-- Formulario -->
+        <VBox spacing="15" alignment="CENTER" maxWidth="300">
+            <!-- Usuario -->
+            <VBox spacing="5">
+                <Label text="Usuario" styleClass="field-label"/>
+                <TextField fx:id="usernameField" promptText="Introduce tu usuario" 
+                           styleClass="login-field" prefHeight="45"/>
+            </VBox>
+            
+            <!-- Contraseña -->
+            <VBox spacing="5">
+                <Label text="Contraseña" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField" promptText="Introduce tu contraseña" 
+                               styleClass="login-field" prefHeight="45"/>
+            </VBox>
+            
+            <!-- Recordar -->
+            <HBox alignment="CENTER_LEFT">
+                <CheckBox fx:id="rememberCheck" text="Recordar sesión" styleClass="remember-check"/>
+            </HBox>
+            
+            <!-- Error -->
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+            
+            <!-- Botón Login -->
+            <StackPane>
+                <Button fx:id="loginButton" text="Iniciar Sesión" styleClass="login-button" 
+                        prefHeight="45" prefWidth="300" onAction="#handleLogin"/>
+                <ProgressIndicator fx:id="loadingIndicator" visible="false" 
+                                   maxWidth="24" maxHeight="24"/>
+            </StackPane>
+        </VBox>
+        
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="5">
+            <Separator maxWidth="200"/>
+            <Label text="Demo: admin / admin" styleClass="demo-hint"/>
+            <Label text="v1.0.0 - © 2024 GarantíasApp" styleClass="version-label"/>
+        </VBox>
+    </VBox>
+</StackPane>

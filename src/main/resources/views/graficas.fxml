@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.garantias.controller.GraficasController"
+      spacing="25" styleClass="page-content">
+    
+    <!-- Stats Summary -->
+    <HBox spacing="20">
+        <padding>
+            <Insets top="0" right="20" bottom="0" left="20"/>
+        </padding>
+        
+        <VBox styleClass="mini-stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="📋" style="-fx-font-size: 28px;"/>
+            <Label fx:id="totalGarantias" text="0" styleClass="mini-stat-value"/>
+            <Label text="Total Garantías" styleClass="mini-stat-label"/>
+        </VBox>
+        
+        <VBox styleClass="mini-stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="📄" style="-fx-font-size: 28px;"/>
+            <Label fx:id="totalFacturas" text="0" styleClass="mini-stat-value"/>
+            <Label text="Total Facturas" styleClass="mini-stat-label"/>
+        </VBox>
+        
+        <VBox styleClass="mini-stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="💰" style="-fx-font-size: 28px;"/>
+            <Label fx:id="totalFacturado" text="€0" styleClass="mini-stat-value"/>
+            <Label text="Total Facturado" styleClass="mini-stat-label"/>
+        </VBox>
+        
+        <VBox styleClass="mini-stat-card" HBox.hgrow="ALWAYS" alignment="CENTER">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="📊" style="-fx-font-size: 28px;"/>
+            <Label fx:id="promedioFactura" text="€0" styleClass="mini-stat-value"/>
+            <Label text="Promedio/Factura" styleClass="mini-stat-label"/>
+        </VBox>
+    </HBox>
+    
+    <!-- Gráficas principales -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="0" right="20" bottom="0" left="20"/>
+        </padding>
+        
+        <!-- Gráfica de Estados (Pie) -->
+        <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            <Label text="Garantías por Estado" styleClass="chart-title"/>
+            <PieChart fx:id="estadoChart" VBox.vgrow="ALWAYS" legendSide="BOTTOM"/>
+        </VBox>
+        
+        <!-- Gráfica de Marcas (Bar) -->
+        <VBox styleClass="chart-card" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            <Label text="Garantías por Marca" styleClass="chart-title"/>
+            <BarChart fx:id="marcasChart" VBox.vgrow="ALWAYS" legendVisible="false">
+                <xAxis><CategoryAxis label="Marca"/></xAxis>
+                <yAxis><NumberAxis label="Cantidad"/></yAxis>
+            </BarChart>
+        </VBox>
+    </HBox>
+    
+    <!-- Gráfica de facturación -->
+    <HBox spacing="20">
+        <padding>
+            <Insets top="0" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <VBox styleClass="chart-card" HBox.hgrow="ALWAYS" prefHeight="280">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <Label text="Facturación Mensual" styleClass="chart-title" HBox.hgrow="ALWAYS"/>
+                <Button styleClass="chart-action-btn" onAction="#refreshCharts">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sync-alt" iconSize="12"/>
+                    </graphic>
+                </Button>
+                <Button styleClass="chart-action-btn" onAction="#exportReport">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-download" iconSize="12"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <LineChart fx:id="facturacionChart" VBox.vgrow="ALWAYS" createSymbols="true">
+                <xAxis><CategoryAxis label="Mes"/></xAxis>
+                <yAxis><NumberAxis label="Ingresos (€)"/></yAxis>
+            </LineChart>
+        </VBox>
+        
+        <!-- Gráfica de tipos -->
+        <VBox styleClass="chart-card" prefWidth="350" prefHeight="280">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
+            <Label text="Tipos de Garantía" styleClass="chart-title"/>
+            <PieChart fx:id="tipoGarantiaChart" VBox.vgrow="ALWAYS" legendSide="BOTTOM"/>
+        </VBox>
+    </HBox>
+</VBox>

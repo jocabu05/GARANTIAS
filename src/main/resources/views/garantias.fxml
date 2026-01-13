@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.garantias.controller.GarantiasController"
+      spacing="20" styleClass="page-content">
+    
+    <!-- Toolbar -->
+    <HBox styleClass="toolbar" spacing="15" alignment="CENTER_LEFT">
+        <padding>
+            <Insets top="15" right="20" bottom="15" left="20"/>
+        </padding>
+        
+        <!-- Búsqueda -->
+        <HBox styleClass="search-box" spacing="10" alignment="CENTER_LEFT">
+            <FontIcon iconLiteral="fas-search" iconSize="14" styleClass="search-icon"/>
+            <TextField fx:id="searchField" promptText="Buscar por cliente, número, serie..." 
+                       prefWidth="300" styleClass="search-field"/>
+        </HBox>
+        
+        <!-- Filtros -->
+        <ComboBox fx:id="filterEstado" promptText="Estado" prefWidth="160"/>
+        
+        <Region HBox.hgrow="ALWAYS"/>
+        
+        <!-- Acciones -->
+        <Button fx:id="btnRefresh" styleClass="toolbar-button" onAction="#refreshData">
+            <graphic>
+                <FontIcon iconLiteral="fas-sync-alt" iconSize="14"/>
+            </graphic>
+            <tooltip><Tooltip text="Actualizar"/></tooltip>
+        </Button>
+        
+        <Button fx:id="btnNueva" styleClass="toolbar-button primary" onAction="#showNewGarantiaDialog">
+            <graphic>
+                <FontIcon iconLiteral="fas-plus" iconSize="14"/>
+            </graphic>
+            <text>Nueva Garantía</text>
+        </Button>
+    </HBox>
+    
+    <!-- Tabla -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container">
+        <padding>
+            <Insets top="0" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <TableView fx:id="garantiasTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+            <columns>
+                <TableColumn fx:id="colNumero" text="Nº Garantía" prefWidth="130"/>
+                <TableColumn fx:id="colCliente" text="Cliente" prefWidth="200"/>
+                <TableColumn fx:id="colEquipo" text="Equipo" prefWidth="200"/>
+                <TableColumn fx:id="colFechaInicio" text="Inicio" prefWidth="100"/>
+                <TableColumn fx:id="colFechaFin" text="Vencimiento" prefWidth="100"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+                <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="120"/>
+            </columns>
+            <placeholder>
+                <Label text="No hay garantías registradas" styleClass="table-placeholder"/>
+            </placeholder>
+        </TableView>
+    </VBox>
+    
+    <!-- Footer -->
+    <HBox styleClass="table-footer" alignment="CENTER_LEFT" spacing="20">
+        <padding>
+            <Insets top="10" right="20" bottom="15" left="20"/>
+        </padding>
+        <Label fx:id="totalLabel" text="Mostrando 0 garantía(s)" styleClass="footer-label"/>
+    </HBox>
+</VBox>

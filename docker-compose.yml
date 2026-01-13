@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # ODOO - Gestión de Usuarios
+  # ============================================
+  odoo:
+    image: odoo:17
+    container_name: garantias_odoo
+    depends_on:
+      - postgres
+    ports:
+      - "8070:8069"
+    environment:
+      - HOST=postgres
+      - USER=odoo
+      - PASSWORD=odoo_password_2024
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - odoo_addons:/mnt/extra-addons
+    networks:
+      - garantias_network
+    restart: unless-stopped
+
+  # ============================================
+  # PostgreSQL - Base de datos para Odoo
+  # ============================================
+  postgres:
+    image: postgres:15
+    container_name: garantias_postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo_password_2024
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+    networks:
+      - garantias_network
+    restart: unless-stopped
+
+  # ============================================
+  # MongoDB - Almacenamiento de Garantías y Facturas
+  # ============================================
+  mongodb:
+    image: mongo:7
+    container_name: garantias_mongodb
+    ports:
+      - "27018:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=mongo_password_2024
+      - MONGO_INITDB_DATABASE=garantias_db
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - garantias_network
+    restart: unless-stopped
+
+  # ============================================
+  # Mongo Express - Interfaz web para MongoDB (opcional)
+  # ============================================
+  mongo-express:
+    image: mongo-express:latest
+    container_name: garantias_mongo_express
+    depends_on:
+      - mongodb
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=mongo_password_2024
+      - ME_CONFIG_MONGODB_URL=mongodb://admin:mongo_password_2024@mongodb:27017/
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=admin123
+    networks:
+      - garantias_network
+    restart: unless-stopped
+
+# ============================================
+# Volúmenes persistentes
+# ============================================
+volumes:
+  odoo_data:
+    driver: local
+  odoo_addons:
+    driver: local
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+
+# ============================================
+# Red interna
+# ============================================
+networks:
+  garantias_network:
+    driver: bridge
