@@ -497,7 +497,7 @@ Este proyecto es de uso **educativo** y fue desarrollado como parte de un proyec
 
 ## 👨‍💻 Autor
 
-**Jorge Castillo Bueno** - [@jocabu05](https://github.com/jocabu05)
+**Jorge Casterá Bueno** - [@jocabu05](https://github.com/jocabu05)
 
 Desarrollado como proyecto de gestión empresarial para empresas de instalación y mantenimiento de aires acondicionados.
 
